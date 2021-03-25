@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    姓：<input type="text" v-model="firstName">
+    名：<input type="text" v-model="lastName">
+    <p>全名：{{fullName}}</p>
+
+    <hr>
+
+    姓名：<input type="text" v-model="allName"> <br>
+    姓：<p>{{fName}}</p>
+    名：<p>{{lName}}</p>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            firstName: "",
+            lastName: "",
+
+            allName: "",
+            fName: "",
+            lName: "",
+        },
+        computed: {
+            fullName() {
+                return this.firstName + this.lastName;
+            },
+        },
+        watch:{
+            // 监听用户名是否有输入
+            allName(){
+                let split = this.allName.split(" ");
+                this.fName = split[0];
+                this.lName = split[1];
+            },
+        }
+    })
+</script>
+
+</body>
+</html>

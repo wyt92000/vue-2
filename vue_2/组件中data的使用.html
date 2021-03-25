@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <first></first>
+    <hr>
+
+    <h1>{{username}}</h1>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    // 组件中的data是一个函数，但是不能写成箭头函数
+    // 除了data的定义方式，其余与vue实例中的data并没有任何不同
+    // 组件间的数据是相互隔离的  互不影响
+    let first = {
+        template: `
+            <div>
+                <span>{{username}}</span>
+                <h3 @click="change">{{count}}</h3>
+            </div>
+        `,
+        // 组件中的data 定义是一个函数
+        data: function () {
+            // 数据定义完成后需要return出去
+            return {
+                username: "刘亦菲",
+                count: 30,
+            }
+        },
+        methods: {
+            change() {
+                this.count--;
+            }
+        }
+    }
+
+    Vue.component("first", first)
+
+    new Vue({
+        el: "#app",
+        data: {
+            username: "赵丽颖",
+        },
+    })
+</script>
+
+</body>
+</html>

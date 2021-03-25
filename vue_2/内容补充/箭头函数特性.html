@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    let student = {
+        username: "小黑",
+        app: function () {
+            // 当前this 指向的是当前的student对象
+            console.log(this)
+        }
+    }
+
+    let user = {
+        username: "小白",
+        app: function () {
+            // 回调函数 this的指向会被改变，不会再指向当前user对象了
+            setTimeout(function () {
+                // 获取不到this对象了  在回调函数中this的指向会被改变
+                console.log(this.username)
+            }, 1000)
+        }
+    }
+
+    let employee = {
+        username: "小黄",
+        app: function () {
+            // 回调函数中this的指向会被改变
+            setTimeout(() => {
+                // 在箭头函数中this的指向不会被改变
+                console.log(this.username)
+            }, 1000)
+        }
+    }
+
+    employee.app()
+</script>
+
+</body>
+</html>

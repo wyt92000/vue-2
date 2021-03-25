@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <input type="text" v-model="username">
+    <br>
+    父组件的参数：{{username}}
+
+    <hr>
+
+    <!--  子组件的标签  -->
+    <!--  父组件向子组件传递数据：在子组件上的标签上绑定一个属性  :任意属性名="你想要传递的父组件的变量"  -->
+    <first :test="username"></first>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    // 子组件
+    let first = {
+        template: `
+            <div>子组件接收的父组件的用户名：{{test}}</div>
+        `,
+        // 在子组件内部接受父组件传递来的参数
+        props: ["test"]
+    }
+
+    // 父组件
+    new Vue({
+        el: "#app",
+        data: {
+            username: "",
+        },
+        components: {
+            "first": first,
+        }
+    })
+</script>
+
+</body>
+</html>

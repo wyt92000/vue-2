@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <first></first>
+    <h3>{{username}}</h3>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    // 组件1
+    let first = {
+        template: `
+            <div>{{username}}</div>
+        `,
+        data: function () {
+            return {
+                username: "小白"
+            }
+        }
+    }
+
+    // 组件2
+    new Vue({
+        el: "#app",
+        data: {
+            username: "小黑",
+            count: 20
+        },
+        components: {
+            "first": first,
+        }
+    })
+</script>
+
+</body>
+</html>

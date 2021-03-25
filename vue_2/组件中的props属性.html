@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .aa {
+            color: red;
+        }
+
+        .bb {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <!--  第一个组件原有样式  第二个aa  第三个组件bb  -->
+    <com user="tom"></com>
+    <!-- 可以通过组件的标签向组件内部传递参数   -->
+    <com color="aa" user="jack"></com>
+    <com color="bb" user="marry"></com>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    // 组件1
+    // 组件template中只能有一个根标签  不能有同级的标签
+    // 跟标签可以是任意标签 不能有兄弟标签
+    let com = {
+        template: `
+            <div :class="color">
+                这是我的com组件==={{user}}
+            </div>
+        `,
+        // 在组件内接收组件标签上传递过来的参数  从而是定义的组件拥有动态的属性
+        // props属性 理解一个数组  里面是组件可以接收所有参数  相当于参数名
+        // 可以将props作为一个只读的data属性
+        props: ["color", "user"],
+    }
+
+    // vue 也是一个特殊的组件：由于组件1直接注册到了组件2里面，所以组件2是组件1的父组件
+    // 组件2
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            "com": com,
+        }
+    })
+</script>
+
+</body>
+</html>

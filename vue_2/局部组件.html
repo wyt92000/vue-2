@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <first></first>
+    <second></second>
+
+</div>
+
+<hr>
+
+<div id="app2">
+
+    <first></first>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    let first = {
+        template: `
+        <div>这是First组件</div>
+        `
+    }
+
+    let second = {
+        template: `
+        <div>这是Second组件</div>
+        `
+    }
+
+    // 全局组件  一般情况下不使用全局组件
+    // Vue.component("first", first)
+
+    new Vue({
+        el: "#app",
+        data: {},
+        // 局部组件注册  将组件注册到某个vue实例中
+        // 局部组件只能在注册的vue实例中使用  在其他作用范围内不生效
+        components: {
+            "first": first,
+            "second": second
+        }
+    })
+
+    new Vue({
+        el: "#app2"
+    })
+
+</script>
+
+</body>
+</html>

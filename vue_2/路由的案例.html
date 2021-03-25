@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <h1>页头</h1>
+    <router-link to="/index">首页</router-link>
+    <router-link to="/stu">学生管理</router-link>
+
+    <hr>
+
+    <!--  4. 路由对应组件出现的位置  -->
+    <router-view></router-view>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-router.3.0.1.js"></script>
+
+<script>
+
+    // 1. 准备组件
+    let index = {
+        template: `
+        <div>
+        这是index页面
+        <h3>欢迎访问信息管理系统</h3>
+</div>
+        `
+    }
+
+    let student = {
+        template: `
+            <div>
+                <h3>用户列表页</h3>
+                <table border="2px">
+                    <tr>
+                        <td>姓名</td>
+                        <td>生日</td>
+                    </tr>
+                    <tr v-for="user in users">
+                        <td>{{user.username}}</td>
+                        <td>{{user.bir}}</td>
+                    </tr>
+                </table>
+            </div>
+        `,
+        data() {
+            return {
+                users: [
+                    {username: "小黑", bir: "2012-12012"},
+                    {username: "小白", bir: "2012-12012"},
+                ]
+            }
+        },
+    }
+
+    // 2. 为组件定义路由
+    let myRouter = new VueRouter({
+        routes: [
+            {path: "/index", component: index},
+            {path: "/stu", component: student},
+            {path: "/", redirect: "/index"},
+            // 如果用户没有访问任何路由，则重定向到首页
+            // 如果前端路由没匹配到任何路径时，重定向到首页 一定要放到路由末尾
+            {path: "/*", redirect: "/index"},
+
+        ]
+    })
+
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            "index": index,
+            "student": student,
+        },
+        // 3. 注入到vue实例中
+        router: myRouter,
+    })
+</script>
+
+</body>
+</html>

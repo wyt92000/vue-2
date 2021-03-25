@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <com></com>
+
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    // 1. 组件的定义  组件是一个普通的js对象
+    // 组件是一个特殊的vue对象  组件也可以有data methods created等  vue对象的属性都可以用到组件
+    let com = {
+        template: `
+            <div>这是我的第一个vue组件
+                <button @click="clickMe">点我</button>
+            </div>
+        `,
+        // 组件一样可以使用vue实例中的属性
+        methods: {
+            clickMe() {
+                // alert("我是组件中的事件")
+            },
+        },
+        created: function () {
+            // 数据完成后出发
+            alert("数据赋值完成")
+        }
+    }
+
+    // 2. 全局注册
+    Vue.component("com", com)
+
+    new Vue({
+        el: "#app",
+        data: {},
+    })
+</script>
+
+</body>
+</html>
